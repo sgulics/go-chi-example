@@ -1,13 +1,13 @@
 package routes
 
 import (
-	"chipoc/pkg/models"
-	"chipoc/pkg/services"
 	"context"
 	"errors"
 	"fmt"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/render"
+	"github.com/sgulics/go-chi-example/pkg/models"
+	"github.com/sgulics/go-chi-example/pkg/services"
 	"math/rand"
 	"net/http"
 	"strings"

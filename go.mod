@@ -1,4 +1,4 @@
-module chipoc
+module github.com/sgulics/go-chi-example
 
 go 1.13
 

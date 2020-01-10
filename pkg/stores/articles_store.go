@@ -1,7 +1,7 @@
 package stores
 
 import (
-	"chipoc/pkg/models"
+	"github.com/sgulics/go-chi-example/pkg/models"
 )
 
 type ArticlesStore interface {

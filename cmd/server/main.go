@@ -1,14 +1,15 @@
 package main
 
 import (
-	"chipoc/pkg/routes"
-	"chipoc/pkg/services"
-	"chipoc/pkg/stores"
 	"context"
 	"fmt"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/valve"
+	customMiddleware "github.com/sgulics/go-chi-example/pkg/middleware"
+	"github.com/sgulics/go-chi-example/pkg/routes"
+	"github.com/sgulics/go-chi-example/pkg/services"
+	"github.com/sgulics/go-chi-example/pkg/stores"
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"os"
@@ -35,7 +36,7 @@ func main() {
 	// process, and where the last number is an atomically incremented request
 	// counter.
 	r.Use(middleware.RequestID)
-	r.Use(NewStructuredLogger(logger))
+	r.Use(customMiddleware.NewStructuredLogger(logger))
 	// Recoverer is a middleware that recovers from panics, logs the panic (and a
 	// backtrace), and returns a HTTP 500 (Internal Server Error) status if
 	// possible. Recoverer prints a request ID if one is provided.

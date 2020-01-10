@@ -1,8 +1,8 @@
 package services
 
 import (
-	"chipoc/pkg/models"
-	"chipoc/pkg/stores"
+	"github.com/sgulics/go-chi-example/pkg/models"
+	"github.com/sgulics/go-chi-example/pkg/stores"
 	"github.com/sirupsen/logrus"
 )
 

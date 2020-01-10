@@ -1,9 +1,9 @@
 package stores
 
 import (
-	"chipoc/pkg/models"
 	"errors"
 	"fmt"
+	"github.com/sgulics/go-chi-example/pkg/models"
 	"math/rand"
 )
 

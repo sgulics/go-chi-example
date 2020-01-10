@@ -1,4 +1,4 @@
-package main
+package middleware
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 )
 
 // StructuredLogger is a simple, but powerful implementation of a custom structured
-// logger backed on logrus. I encourage users to copy it, adapt it and make it their
+// middleware backed on logrus. I encourage users to copy it, adapt it and make it their
 // own. Also take a look at https://github.com/pressly/lg for a dedicated pkg based
 // on this work, designed for context-based http routers.
 
@@ -72,7 +72,7 @@ func (l *StructuredLoggerEntry) Panic(v interface{}, stack []byte) {
 }
 
 // Helper methods used by the application to get the request-scoped
-// logger entry and set additional fields between handlers.
+// middleware entry and set additional fields between handlers.
 //
 // This is a useful pattern to use to set state on the entry as it
 // passes through the handler chain, which at any point can be logged
