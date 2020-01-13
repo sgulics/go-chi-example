@@ -10,6 +10,7 @@ import (
 	"github.com/sgulics/go-chi-example/pkg/routes"
 	"github.com/sgulics/go-chi-example/pkg/services"
 	"github.com/sgulics/go-chi-example/pkg/stores"
+	"github.com/sgulics/go-chi-example/pkg/templating"
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"os"
@@ -29,6 +30,14 @@ func main() {
 		DisableTimestamp: false,
 	}
 
+	//tm := template_manager.NewTemplateManager("templates_oild/layouts/", "templates_oild/")
+	tm, err := templating.NewTemplateManager("templates/", "templates/layouts", ".gohtml", true)
+	//err := tm.LoadTemplates()
+	//err := tm.FindAndParseTemplates()
+	if err != nil {
+		panic(err)
+	}
+
 	r := chi.NewRouter()
 	// RequestID is a middleware that injects a request ID into the context of each
 	// request. A request ID is a string of the form "host.example.com/random-0001",
@@ -44,11 +53,11 @@ func main() {
 	// URLFormat is a middleware that parses the url extension from a request path and stores it
 	// on the context as a string under the key `middleware.URLFormatCtxKey`. The middleware will
 	// trim the suffix from the routing path and continue routing.
-	r.Use(middleware.URLFormat)
+	//r.Use(middleware.URLFormat)
 	//r.Use(render.SetContentType(render.ContentTypeJSON))
 	service := services.NewArticlesService(stores.NewMemoryStore(), logger)
 
-	r.Mount("/admin", routes.AdminRoutes())
+	r.Mount("/admin", routes.AdminRoutes(tm))
 	r.Mount("/monitors", routes.MonitorRoutes())
 	r.Mount("/v1/articles", routes.NewArticleResource(service).ArticleRoutes())
 

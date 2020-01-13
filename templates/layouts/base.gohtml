@@ -1,0 +1,21 @@
+{{define "base"}}
+    <!doctype html>
+    <html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>{{template "title" .}} - Admin</title>
+    </head>
+    <body>
+    <header>
+        <h1><a href='/admin'>Admin</a></h1>
+    </header>
+    {{block "sidebar" .}}
+        <p>My default sidebar content</p>
+    {{end}}
+    <main>
+        {{template "main" .}}
+    </main>
+    {{template "footer" .}}
+    </body>
+    </html>
+{{end}}
