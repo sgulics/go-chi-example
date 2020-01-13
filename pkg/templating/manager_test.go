@@ -140,33 +140,7 @@ func TestRender(t *testing.T) {
 			for _, content := range tt.content {
 				require.Contains(t, output,content)
 			}
-
-			//type templateData struct {
-			//	Title string
-			//}
-			//data := templateData{Title: "DID IT WORK?"}
-
-
-			//err = gotTmpl.Render(buf, "users/nested_one", data )
-			//require.NoError(t, err)
-			//output := buf.String()
-			//require.Contains(t, output, data.Title)
-			//require.Contains(t, output, "Powered by")
-			//
-			//
-			//buf = new(bytes.Buffer)
-			//
-			//err = gotTmpl.Render(buf, "accounts/index", data )
-			//require.NoError(t, err)
-			//output = buf.String()
-			//require.Contains(t, output, data.Title)
-			//require.Contains(t, output, "CUSTOM FOOTER")
-
-
-
-			//if !reflect.DeepEqual(gotTmpl, tt.wantTmpl) {
-			//	t.Errorf("NewTemplateManager() gotTmpl = %v, want %v", gotTmpl, tt.wantTmpl)
-			//}
+			
 		})
 	}
 
