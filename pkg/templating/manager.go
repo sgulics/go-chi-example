@@ -2,6 +2,7 @@ package templating
 
 import (
 	"errors"
+	"github.com/Masterminds/sprig"
 	"html/template"
 	"io"
 	"io/ioutil"
@@ -29,7 +30,7 @@ type TemplateManager struct {
 // directory to load templates_oild from. The ext argument is extension of
 // tempaltes. The devel (if true) turns the TemplateManager to reload templates_oild
 // every Render if there is a change in the dir.
-func NewTemplateManager(dir, layoutDir string, ext string, devel bool) (tmpl *TemplateManager, err error) {
+func NewTemplateManager(dir, layoutDir string, ext string, funcMap template.FuncMap, devel bool) (tmpl *TemplateManager, err error) {
 
 	// get absolute path
 	if dir, err = filepath.Abs(dir); err != nil {
@@ -46,6 +47,8 @@ func NewTemplateManager(dir, layoutDir string, ext string, devel bool) (tmpl *Te
 	tmpl.ext = ext
 	tmpl.devel = devel
 	tmpl.layoutDir = layoutDir
+	tmpl.funcs = funcMap
+
     tmpl.templates = make(map[string]*template.Template)
 
 	if err = tmpl.Load(); err != nil {
@@ -131,7 +134,7 @@ func (t *TemplateManager) Load() (err error) {
 		rel = strings.TrimSuffix(rel, t.ext)
 
 		var (
-			nt = template.New(rel)
+			nt = template.New(rel).Funcs(sprig.FuncMap()).Funcs(t.funcs)
 			b  []byte
 		)
 

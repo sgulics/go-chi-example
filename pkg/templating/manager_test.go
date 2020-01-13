@@ -2,12 +2,20 @@ package templating
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/stretchr/testify/require"
+	"html/template"
 	"testing"
 )
 
 // Tests are no where near complete. Just used it for basic smoke testing
 // TODO needs more tests
+
+var funcMap = template.FuncMap{
+	"customMethod": func(thing string) string {
+		return fmt.Sprintf("Custom Method %s", thing)
+	},
+}
 
 func TestNewTmpl(t *testing.T) {
 	type args struct {
@@ -38,7 +46,7 @@ func TestNewTmpl(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotTmpl, err := NewTemplateManager(tt.args.dir, tt.args.layoutDir, tt.args.ext, tt.args.devel)
+			gotTmpl, err := NewTemplateManager(tt.args.dir, tt.args.layoutDir, tt.args.ext, funcMap, tt.args.devel)
 			if tt.wantErr {
 				require.Error(t, err)
 			}
@@ -98,7 +106,12 @@ func TestRender(t *testing.T) {
 		},
 		{
 			name:          "Render Accounts/Index",
-			args:          args{dir: "../../templates", layoutDir: "../../templates/layouts", ext: ".gohtml", devel: true},
+			args:          args{
+				dir: "../../templates",
+				layoutDir: "../../templates/layouts",
+				ext: ".gohtml",
+				devel: true,
+			},
 			wantErr:       false,
 			template: "accounts/index",
 			data: &viewData{Title: "Accounts"},
@@ -107,6 +120,7 @@ func TestRender(t *testing.T) {
 				"My default sidebar content",
 				"Accounts - Admin",
 				"Look I have a custom footer",
+				"HELLO!HELLO!HELLO!HELLO!HELLO!", // test sprig is installed
 			},
 		},
 		{
@@ -121,13 +135,14 @@ func TestRender(t *testing.T) {
 				"My default sidebar content",
 				"Show User 123",
 				"This is the Admin Footer",
+				"Custom Method 123",
 			},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotTmpl, err := NewTemplateManager(tt.args.dir, tt.args.layoutDir, tt.args.ext, tt.args.devel)
+			gotTmpl, err := NewTemplateManager(tt.args.dir, tt.args.layoutDir, tt.args.ext, funcMap, tt.args.devel)
 			if tt.wantErr {
 				require.Error(t, err)
 			}
@@ -140,7 +155,7 @@ func TestRender(t *testing.T) {
 			for _, content := range tt.content {
 				require.Contains(t, output,content)
 			}
-			
+
 		})
 	}
 

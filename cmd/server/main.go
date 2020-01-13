@@ -12,6 +12,7 @@ import (
 	"github.com/sgulics/go-chi-example/pkg/stores"
 	"github.com/sgulics/go-chi-example/pkg/templating"
 	"github.com/sirupsen/logrus"
+	"html/template"
 	"net/http"
 	"os"
 	"os/signal"
@@ -30,8 +31,14 @@ func main() {
 		DisableTimestamp: false,
 	}
 
+	funcMap := template.FuncMap{
+		"customMethod": func(thing string) string {
+			return fmt.Sprintf("Custom Method %s", thing)
+		},
+	}
+
 	//tm := template_manager.NewTemplateManager("templates_oild/layouts/", "templates_oild/")
-	tm, err := templating.NewTemplateManager("templates/", "templates/layouts", ".gohtml", true)
+	tm, err := templating.NewTemplateManager("templates/", "templates/layouts", ".gohtml", funcMap, true)
 	//err := tm.LoadTemplates()
 	//err := tm.FindAndParseTemplates()
 	if err != nil {
