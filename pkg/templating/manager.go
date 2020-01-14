@@ -160,13 +160,6 @@ func (t *TemplateManager) Load() (err error) {
 		return
 	}
 
-	// necessary for reloading
-	// TODO use something like this for the funcMap
-	//if t.funcs != nil {
-	//	root = root.Funcs(t.funcs)
-	//}
-
-
 	return
 }
 
@@ -209,21 +202,20 @@ func (t *TemplateManager) IsModified() (yep bool, err error) {
 	return
 }
 
-func (t *TemplateManager) Render(w io.Writer, name string, data interface{}) (err error) {
-
+func (t *TemplateManager) Template(name string) (tmpl *template.Template, err error) {
 	// if development
 	if t.devel == true {
 
 		// lookup directory for changes
-		var modified bool
-		if modified, err = t.IsModified(); err != nil {
-			return
+		modified, err := t.IsModified()
+		if err != nil {
+			return nil, err
 		}
 
 		// reload
 		if modified == true {
 			if err = t.Load(); err != nil {
-				return
+				return nil, err
 			}
 		}
 
@@ -231,8 +223,18 @@ func (t *TemplateManager) Render(w io.Writer, name string, data interface{}) (er
 
 	tmpl, ok := t.templates[name]
 	if !ok{
-		return errors.New("template not found")
+		return  nil, errors.New("template not found")
 	}
+	return tmpl.Clone()
+}
+
+func (t *TemplateManager) Render(w io.Writer, name string, data interface{}) (err error) {
+
+	tmpl, err := t.Template(name)
+	if err != nil {
+		return err
+	}
+
 	return tmpl.Execute(w, data)
 }
 
