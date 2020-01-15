@@ -3,6 +3,7 @@ package templating
 import (
 	"bytes"
 	"fmt"
+	"github.com/sgulics/go-chi-example/pkg/webpack"
 	"github.com/stretchr/testify/require"
 	"html/template"
 	"testing"
@@ -15,6 +16,11 @@ var funcMap = template.FuncMap{
 	"customMethod": func(thing string) string {
 		return fmt.Sprintf("Custom Method %s", thing)
 	},
+}
+
+func init() {
+	// Use the dummy manifest.json in this package for testing
+	webpack.FsPath = "./"
 }
 
 func TestNewTmpl(t *testing.T) {

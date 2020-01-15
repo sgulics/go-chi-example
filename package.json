@@ -1,0 +1,43 @@
+{
+  "name": "go-webpack-example",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "repository": "",
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.3.1",
+    "babel-loader": "^8.0.2",
+    "compression-webpack-plugin": "^3.0.0",
+    "core-js": "3",
+    "css-hot-loader": "^1.3.6",
+    "css-loader": "^3.2.0",
+    "extract-css-chunks-webpack-plugin": "^4.6.0",
+    "file-loader": "^4.3.0",
+    "html-loader": "^0.5.5",
+    "node-sass": "^4.0.0",
+    "normalize.css": "^8.0.1",
+    "postcss-functions": "^3.0.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.3.0",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-manifest-plugin": "^2.0.4"
+  },
+  "scripts": {
+    "build": "assets --config webpack.config.js",
+    "start": "webpack-dev-server --config webpack.config.js --hot --inline"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.1.1"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "application.css": "http://localhost:3808/assets/application.css",
+  "application.js": "http://localhost:3808/assets/application.js",
+  "application.css.map": "http://localhost:3808/assets/application.css.map",
+  "application.js.map": "http://localhost:3808/assets/application.js.map",
+  "vendor.js": "http://localhost:3808/assets/vendor.js",
+  "vendor.js.map": "http://localhost:3808/assets/vendor.js.map",
+  "mountain.jpg": "http://localhost:3808/assets/2ce8ac42ee5d31209633c664f773cc58.jpg",
+  "mountain2.jpg": "http://localhost:3808/assets/mountain2-2ce8ac42ee5d31209633c664f773cc58.jpg",
+  "mountain3.jpg": "http://localhost:3808/assets/mountain3-2ce8ac42ee5d31209633c664f773cc58.jpg"
+}

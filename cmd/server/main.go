@@ -64,6 +64,7 @@ func main() {
 	//r.Use(render.SetContentType(render.ContentTypeJSON))
 	service := services.NewArticlesService(stores.NewMemoryStore(), logger)
 
+	r.Mount("/assets", routes.AssetRoutes())
 	r.Mount("/admin", routes.AdminRoutes(tm))
 	r.Mount("/monitors", routes.MonitorRoutes())
 	r.Mount("/v1/articles", routes.NewArticleResource(service).ArticleRoutes())

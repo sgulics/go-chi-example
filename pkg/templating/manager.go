@@ -3,6 +3,7 @@ package templating
 import (
 	"errors"
 	"github.com/Masterminds/sprig"
+	"github.com/sgulics/go-chi-example/pkg/webpack"
 	"html/template"
 	"io"
 	"io/ioutil"
@@ -15,6 +16,18 @@ import (
 // This template manager is heavily influenced by the following
 // * https://gist.github.com/logrusorgru/abd846adb521a6fb39c7405f32fec0cf
 // * https://github.com/asit-dhal/golang-template-layout/blob/master/src/templmanager/templatemanager.go
+
+func init() {
+	// this is because public folder is shared between examples
+	webpack.FsPath = "public/assets"
+}
+
+func viewHelpers() template.FuncMap {
+	return template.FuncMap{
+		"asset": webpack.AssetHelper,
+	}
+}
+
 
 type TemplateManager struct {
 	dir string           // root directory
@@ -48,6 +61,7 @@ func NewTemplateManager(dir, layoutDir string, ext string, funcMap template.Func
 	tmpl.devel = devel
 	tmpl.layoutDir = layoutDir
 	tmpl.funcs = funcMap
+	webpack.Init(devel)
 
     tmpl.templates = make(map[string]*template.Template)
 
@@ -134,7 +148,7 @@ func (t *TemplateManager) Load() (err error) {
 		rel = strings.TrimSuffix(rel, t.ext)
 
 		var (
-			nt = template.New(rel).Funcs(sprig.FuncMap()).Funcs(t.funcs)
+			nt = template.New(rel).Funcs(sprig.FuncMap()).Funcs(t.funcs).Funcs(viewHelpers())
 			b  []byte
 		)
 
@@ -234,7 +248,6 @@ func (t *TemplateManager) Render(w io.Writer, name string, data interface{}) (er
 	if err != nil {
 		return err
 	}
-
 	return tmpl.Execute(w, data)
 }
 

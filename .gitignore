@@ -22,3 +22,6 @@ main
 
 .terraform
 *.tfstate*
+/node_modules/
+/public/webpack/
+/public/assets/

@@ -4,6 +4,7 @@
     <head>
         <meta charset='utf-8'>
         <title>{{template "title" .}} - Admin</title>
+        {{ asset "application.css" }}
     </head>
     <body>
     <header>
@@ -16,6 +17,14 @@
         {{template "main" .}}
     </main>
     {{template "footer" .}}
+    {{ asset "vendor.js" }}
+    {{ asset "application.js" }}
+    <div id="output"></div>
+    <div id="output2"></div>
+    <div >
+        <img src="{{ asset "mountain2.jpg" }}" alt=""/>
+    </div>
+    Mountain: {{ asset "mountain.jpg" }}
     </body>
     </html>
 {{end}}
