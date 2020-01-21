@@ -33,7 +33,7 @@ func main() {
 
 	funcMap := template.FuncMap{
 		"customMethod": func(thing string) string {
-			return fmt.Sprintf("Custom Method %s", thing)
+			return fmt.Sprintf("Custom Method in funcMap added in main.go %s", thing)
 		},
 	}
 

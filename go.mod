@@ -13,6 +13,7 @@ require (
 	github.com/go-chi/valve v0.0.0-20170920024740-9e45288364f4
 	github.com/gobuffalo/packr v1.30.1
 	github.com/google/uuid v1.1.1 // indirect
+	github.com/gorilla/sessions v1.2.0
 	github.com/huandu/xstrings v1.3.0 // indirect
 	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/mitchellh/copystructure v1.0.0 // indirect

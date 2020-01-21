@@ -5,10 +5,10 @@ import Mountain from '../images/mountain.jpg';
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Congratulations, go-webpack is working!");
-    document.getElementById("output").innerHTML = "Congratulations, go-webpack is working!";
+    let output = document.getElementById("output")
+    output.innerHTML = "Congratulations, go-webpack is working! Edit assets/js/application.js for hot reload. The following image is added by javascript";
     const element = document.createElement('div');
     const myIcon = new Image();
     myIcon.src = Mountain;
-    element.appendChild(myIcon);
+    output.appendChild(myIcon);
 });

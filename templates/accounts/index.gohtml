@@ -2,6 +2,10 @@
 
 {{define "title"}}{{.Title}}{{end}}
 
+{{block "sidebar" .}}
+    <p>Override common content</p>
+{{end}}
+
 {{define "main"}}
     <h2>Accounts</h2>
     <p>This is the accounts index page</p>

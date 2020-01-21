@@ -25,6 +25,12 @@ func init() {
 func viewHelpers() template.FuncMap {
 	return template.FuncMap{
 		"asset": webpack.AssetHelper,
+		"isLoggedIn": func() bool {
+			return false
+		},
+		"flashMessages": func() []interface{} {
+			return nil
+		},
 	}
 }
 

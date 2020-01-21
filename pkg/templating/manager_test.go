@@ -40,14 +40,14 @@ func TestNewTmpl(t *testing.T) {
 			name: "Init Develop",
 			args: args{dir: "../../templates", layoutDir: "../../templates/layouts", ext: ".gohtml", devel: true},
 			wantErr: false,
-			templateNames: []string{"accounts/index", "users/show", "index"},
+			templateNames: []string{"accounts/index", "users/show", "index", "login"},
 
 		},
 		{
 			name: "Init Not Develop",
 			args: args{dir: "../../templates", layoutDir: "../../templates/layouts", ext: ".gohtml", devel: false},
 			wantErr: false,
-			templateNames: []string{"accounts/index", "users/show", "index"},
+			templateNames: []string{"accounts/index", "users/show", "index", "login"},
 		},
 	}
 	for _, tt := range tests {
