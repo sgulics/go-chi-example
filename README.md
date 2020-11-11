@@ -50,7 +50,7 @@ Please note the admin front end does not actually do anything useful, I just wan
 
 Go to http://localhost:3333/admin 
 
-When prompted to login, to in anything.
+When prompted to login, type in anything.
 
 You should be can make changes to the HTML templates without restarting. 
 
